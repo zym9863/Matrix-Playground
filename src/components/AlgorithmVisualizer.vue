@@ -315,7 +315,7 @@ const visualizeGramSchmidt = (initialMatrix: number[][]) => {
       }
 
       steps.push({
-        matrix: createMatrixFromVectors(vectors, i, orthogonalVectors, j), // Visualizes original and orthogonal vectors
+        matrix: createMatrixFromVectors(vectors, orthogonalVectors), // Visualizes original and orthogonal vectors
         description: `计算向量 v${i + 1} 在正交向量 u${j + 1} 上的投影并累加。`,
         highlights: [] // Difficult to highlight specific cells for vector operations directly
       });
@@ -325,14 +325,14 @@ const visualizeGramSchmidt = (initialMatrix: number[][]) => {
     orthogonalVectors.push(orthogonal_v_i);
 
     steps.push({
-      matrix: createMatrixFromVectors(vectors, -1, orthogonalVectors, i),
+      matrix: createMatrixFromVectors(vectors, orthogonalVectors),
       description: `得到第 ${i + 1} 个正交向量 u${i + 1}。`,
       highlights: []
     });
   }
 
   steps.push({
-    matrix: createMatrixFromVectors(vectors, -1, orthogonalVectors, -1),
+    matrix: createMatrixFromVectors(vectors, orthogonalVectors),
     description: '完成Gram-Schmidt正交化，得到正交向量组。',
     highlights: []
   });
@@ -348,12 +348,10 @@ const dotProduct = (vec1: number[], vec2: number[]): number => {
 // Helper for Gram-Schmidt: Create a matrix for visualization from vectors
 const createMatrixFromVectors = (
   original: number[][],
-  currentOriginalIdx: number,
-  orthogonal: number[][],
-  currentOrthogonalIdx: number
+  orthogonal: number[][]
 ): number[][] => {
   const rows = original[0].length; // Dimension of vectors
-  const cols = original.length + orthogonal.length; // Total number of vectors (original + orthogonal)
+  // const cols = original.length + orthogonal.length; // Total number of vectors (original + orthogonal) // unused
   const combinedMatrix: number[][] = [];
 
   for (let i = 0; i < rows; i++) {

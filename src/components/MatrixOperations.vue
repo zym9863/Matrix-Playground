@@ -143,7 +143,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
   matrixA: number[][];
@@ -263,7 +263,7 @@ const multiplyMatrices = () => {
 
   const rowsA = props.matrixA.length;
   const colsA = props.matrixA[0].length;
-  const rowsB = props.matrixB.length;
+  // const rowsB = props.matrixB.length; // Unused variable
   const colsB = props.matrixB[0].length;
 
   const result = createZeroMatrix(rowsA, colsB);

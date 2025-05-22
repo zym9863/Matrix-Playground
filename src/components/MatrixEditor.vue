@@ -56,7 +56,7 @@
         <div v-for="(row, rowIndex) in matrix" :key="rowIndex" class="matrix-row">
           <input
             type="number"
-            v-for="(cell, colIndex) in row"
+            v-for="(_, colIndex) in row"
             :key="`${rowIndex}-${colIndex}`"
             v-model.number="matrix[rowIndex][colIndex]"
             @input="emitMatrix"
